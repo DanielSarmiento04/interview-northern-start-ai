@@ -176,3 +176,15 @@ class WebsocketHelper:
 
     async def send_audio_done(self):
         await self.websocket.send_text(json.dumps({"type": "audio.done"}))
+
+    async def send_error_message(self, error_message: str):
+        """Send an error message to the client"""
+        await self.websocket.send_text(
+            json.dumps(
+                {
+                    "type": "error",
+                    "message": error_message,
+                    "timestamp": json.dumps({"$date": {"$numberLong": str(int(__import__('time').time() * 1000))}}),
+                }
+            )
+        )
