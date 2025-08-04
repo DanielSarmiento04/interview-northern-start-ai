@@ -78,6 +78,7 @@ async def websocket_endpoint(websocket: WebSocket):
         while True:
             try:
                 message = await websocket.receive_json()
+                print(f"Received message: {message}")
             except WebSocketDisconnect:
                 print("Client disconnected")
                 return
